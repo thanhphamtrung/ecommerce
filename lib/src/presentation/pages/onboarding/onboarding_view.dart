@@ -52,7 +52,7 @@ class OnboardingPage extends StatelessWidget {
               alignment: Alignment.topCenter,
               child: FloatingActionButton(
                 onPressed: () {},
-                child: const Icon(Icons.arrow_forward_sharp),
+                child: const MobileAppAnimatedIcon(),
               ),
             ),
           ),
@@ -68,6 +68,49 @@ class OnboardingPage extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class MobileAppAnimatedIcon extends StatefulWidget {
+  const MobileAppAnimatedIcon({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<MobileAppAnimatedIcon> createState() => _MobileAppAnimatedIconState();
+}
+
+class _MobileAppAnimatedIconState extends State<MobileAppAnimatedIcon>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController controller;
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+      duration: const Duration(milliseconds: 500),
+      vsync: this,
+    )
+      ..forward()
+      ..addListener(() {
+        if (controller.isCompleted) {
+          controller.repeat(reverse: true);
+        }
+      });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: controller,
+      builder: (BuildContext context, Widget? child) {
+        return Transform.translate(
+            offset: Offset(controller.value * 8, 0),
+            child: const Icon(
+              Icons.arrow_forward,
+              size: 20,
+            ));
+      },
     );
   }
 }
