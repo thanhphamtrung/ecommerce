@@ -1,3 +1,4 @@
+import 'package:e_commerce/src/presentation/pages/onboarding/onboarding_view.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatefulWidget {
@@ -12,15 +13,10 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: SafeArea(
+      theme: ThemeData(fontFamily: 'Josefin'),
+      home: const SafeArea(
         child: Scaffold(
-          appBar: AppBar(),
-          body: Center(
-            child: Text(
-              'hello world',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ),
+          body: OnboardingPage(),
         ),
       ),
     );
